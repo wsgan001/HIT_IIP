@@ -1,3 +1,7 @@
+/** 
+* 该类用于测试xlsx,xls格式的Excel解析
+* @author Wang Jianyu
+*/ 
 package com.util;
 
 import java.io.File;
@@ -149,5 +153,4 @@ public class ReadExcelTest {
             return String.valueOf(cell.getStringCellValue());
         }
     }
-
 }
