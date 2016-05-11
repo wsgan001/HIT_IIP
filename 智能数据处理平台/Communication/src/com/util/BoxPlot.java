@@ -4,16 +4,11 @@
 */ 
 package com.util;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -24,13 +19,11 @@ import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
 import org.jfree.data.statistics.DefaultBoxAndWhiskerCategoryDataset;
 
 /** @see http://stackoverflow.com/questions/6844759 */
-public class GUITest {
+public class BoxPlot {
 
-    private static final int COLS = 20;
-    private static final int VISIBLE = 4;
-    private static final int ROWS = 5;
-    private static final int VALUES = 10;
-    private static final Random rnd = new Random();
+    private static final int COLS = 3;
+    private static final int VISIBLE = 3;
+    private static final int ROWS = 3;
     private List<String> columns;
     private List<List<List<Double>>> data;
     private DefaultBoxAndWhiskerCategoryDataset dataset;
@@ -38,8 +31,11 @@ public class GUITest {
     private ChartPanel chartPanel;
     private JPanel controlPanel;
     private int start = 0;
+    
+    private ArrayList<Double> telelist = new ArrayList<Double>();
 
-    public GUITest() {
+    public BoxPlot(ArrayList<Double> telelist) {
+    	this.telelist = telelist;
         createData();
         createDataset(start);
         createChartPanel();
@@ -54,19 +50,23 @@ public class GUITest {
             columns.add(name);
             List<List<Double>> list = new ArrayList<List<Double>>();
             for (int j = 0; j < ROWS; j++) {
-                list.add(createValues());
+                list.add(createValues(telelist));
             }
             data.add(list);
         }
     }
 
+    private List<Double> createValues(List<Double> list) {
+        return list;  	
+    }
+    /*
     private List<Double> createValues() {
         List<Double> list = new ArrayList<Double>();
         for (int i = 0; i < VALUES; i++) {
             list.add(rnd.nextGaussian());
         }
         return list;
-    }
+    }*/
 
     private void createDataset(int start) {
         dataset = new DefaultBoxAndWhiskerCategoryDataset();
@@ -75,7 +75,7 @@ public class GUITest {
             int row = 0;
             for (List<Double> values : list) {
                 String category = columns.get(i);
-                dataset.add(values, "s" + row++, category);
+                dataset.add(values, "数据集" + row++, category);
             }
         }
     }
@@ -85,7 +85,7 @@ public class GUITest {
         NumberAxis yAxis = new NumberAxis("Value");
         BoxAndWhiskerRenderer renderer = new BoxAndWhiskerRenderer();
         plot = new CategoryPlot(dataset, xAxis, yAxis, renderer);
-        JFreeChart chart = new JFreeChart("BoxAndWhiskerDemo", plot);
+        JFreeChart chart = new JFreeChart("BoxPlot", plot);
         chartPanel = new ChartPanel(chart);
     }
 
@@ -111,9 +111,6 @@ public class GUITest {
         }));
         controlPanel.add(new JButton(new AbstractAction("Next\u22b3") {
 
-            /**
-			 * 
-			 */
 			private static final long serialVersionUID = 4939665778877662716L;
 
 			@Override
@@ -137,6 +134,7 @@ public class GUITest {
         return controlPanel;
     }
 
+    /*
     public static void main(String[] args) throws IOException {
         EventQueue.invokeLater(new Runnable() {
 
@@ -153,4 +151,5 @@ public class GUITest {
             }
         });
     }
+    */
 }

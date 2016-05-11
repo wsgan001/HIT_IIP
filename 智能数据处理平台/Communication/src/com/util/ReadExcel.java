@@ -18,7 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.xmlbeans.impl.piccolo.io.FileFormatException;
 
-public class ReadExcelTest {
+public class ReadExcel {
 
     private static final String EXTENSION_XLS = "xls";
     private static final String EXTENSION_XLSX = "xlsx";
@@ -26,7 +26,7 @@ public class ReadExcelTest {
     private javax.swing.JTextArea jTextArea1;
     private String file;
     
-    public ReadExcelTest(javax.swing.JTextArea jTextArea1, String file) {
+    public ReadExcel(javax.swing.JTextArea jTextArea1, String file) {
     	this.jTextArea1 = jTextArea1;
     	this.file = file;
     }
@@ -84,6 +84,7 @@ public class ReadExcelTest {
 
         try {
             workbook = this.getWorkbook(file);
+            
             // 读文件 一个sheet一个sheet地读取
             
             Sheet sheet = workbook.getSheetAt(0);//numSheet
@@ -97,7 +98,7 @@ public class ReadExcelTest {
             // 读取首行 即,表头
             Row firstRow = sheet.getRow(firstRowIndex);
             for (int i = firstRow.getFirstCellNum(); i <= firstRow.getLastCellNum(); i++) {
-                Cell cell = firstRow.getCell(i);
+                Cell cell = firstRow.getCell(i);         
                 String cellValue = this.getCellValue(cell, true);
                 jTextArea1.append(" " + cellValue + "\t");
             }
