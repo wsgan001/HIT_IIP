@@ -69,6 +69,8 @@ public class Frame extends javax.swing.JFrame {
 		jMenu3 = new javax.swing.JMenu();
 		jMenuItem5 = new javax.swing.JMenuItem();
 		jMenuItem6 = new javax.swing.JMenuItem();
+		jMenuItem7 = new javax.swing.JMenuItem();
+		jMenuItem8 = new javax.swing.JMenuItem();
 		jMenu2 = new javax.swing.JMenu();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,6 +173,27 @@ public class Frame extends javax.swing.JFrame {
 		});
 		jMenu3.add(jMenuItem6);
 
+		jMenuItem7.setText("\u751f\u6210\u76f4\u65b9\u56fe");
+		jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				try {
+					jMenuItem7ActionPerformed(evt);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		jMenu3.add(jMenuItem7);
+
+		jMenuItem8.setText("\u751f\u6210\u5206\u4f4d\u6570\u56fe");
+		jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jMenuItem8ActionPerformed(evt);
+			}
+		});
+		jMenu3.add(jMenuItem8);
+
 		jMenuBar1.add(jMenu3);
 
 		jMenu2.setText("\u9000\u51fa");
@@ -185,18 +208,16 @@ public class Frame extends javax.swing.JFrame {
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup()
-								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.LEADING)
-												.addComponent(
-														jScrollPane3,
-														javax.swing.GroupLayout.DEFAULT_SIZE,
-														377, Short.MAX_VALUE)
+												javax.swing.GroupLayout.Alignment.TRAILING,
+												false)
+												.addComponent(jScrollPane3, 0,
+														0, Short.MAX_VALUE)
 												.addComponent(
 														jScrollPane1,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														377, Short.MAX_VALUE))
+														389, Short.MAX_VALUE))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
@@ -271,12 +292,12 @@ public class Frame extends javax.swing.JFrame {
 								.addGroup(
 										layout.createParallelGroup(
 												javax.swing.GroupLayout.Alignment.TRAILING)
-												.addComponent(jScrollPane2, 0,
-														0, Short.MAX_VALUE)
 												.addComponent(
 														jScrollPane1,
 														javax.swing.GroupLayout.DEFAULT_SIZE,
-														275, Short.MAX_VALUE))
+														275, Short.MAX_VALUE)
+												.addComponent(jScrollPane2, 0,
+														0, Short.MAX_VALUE))
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
@@ -352,7 +373,21 @@ public class Frame extends javax.swing.JFrame {
 	}// </editor-fold>
 	//GEN-END:initComponents
 
-	private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) throws InvocationTargetException, InterruptedException {
+	private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {
+		// TODO add your handling code here:
+		QuantilePlot plot = new QuantilePlot("");
+		plot.ShowQuantile();
+	}
+
+	private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt)
+			throws IOException {
+		// TODO add your handling code here:
+		Histogram histogram = new Histogram();
+		histogram.getHistogram();
+	}
+
+	private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt)
+			throws InvocationTargetException, InterruptedException {
 		// TODO add your handling code here:
 		String text = jTextArea1.getText();
 		// 清除原有行
@@ -366,16 +401,16 @@ public class Frame extends javax.swing.JFrame {
 		Calculate calculate = new Calculate(text, jTable1, jTable2,
 				jTextField1, jTextField2, jTextField3, jTextField4);
 		calculate.analyze();
-			
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        BoxPlot demo = new BoxPlot(calculate.getTeleTime());
-        frame.add(demo.getChartPanel(), BorderLayout.CENTER);
-        frame.add(demo.getControlPanel(), BorderLayout.SOUTH);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-       
+
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		BoxPlot demo = new BoxPlot(calculate.getTeleTime());
+		frame.add(demo.getChartPanel(), BorderLayout.CENTER);
+		frame.add(demo.getControlPanel(), BorderLayout.SOUTH);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+
 	}
 
 	//读取textarea内容
@@ -411,7 +446,7 @@ public class Frame extends javax.swing.JFrame {
 
 			String fileName = file.getName();
 			String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
-			System.out.println(prefix);
+			//System.out.println(prefix);
 
 			//Excel excel = new Excel();
 			//excel.excute();
@@ -464,6 +499,8 @@ public class Frame extends javax.swing.JFrame {
 	private javax.swing.JMenuItem jMenuItem4;
 	private javax.swing.JMenuItem jMenuItem5;
 	private javax.swing.JMenuItem jMenuItem6;
+	private javax.swing.JMenuItem jMenuItem7;
+	private javax.swing.JMenuItem jMenuItem8;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JScrollPane jScrollPane3;
