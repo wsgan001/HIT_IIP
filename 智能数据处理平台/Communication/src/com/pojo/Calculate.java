@@ -117,6 +117,63 @@ public class Calculate {
 	        jtable2.invalidate();
 		}
 		
+		int[][] chiSquare = new int[3][4];
+		double[][] expection = new double[3][4];
+		
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 4; j++) {
+				chiSquare[i][j] = 0;
+			}
+		}
+		int[] position = new int[2];
+		for(int i = 0; i < totalTime.size(); i++) {
+			position = getPosition(totalTime.get(i));
+			chiSquare[position[0]][position[1]]++;
+		}
+		
+		for(int i = 0; i < 3; i++) {
+			int totalCol = 0;
+			for(int j = 0; j < 2; j++) {
+				totalCol += chiSquare[j][i];
+			}
+			chiSquare[2][i] = totalCol;
+		}
+		
+		for(int i = 0; i < 2; i++) {
+			int totalRaw = 0;
+			for(int j = 0; j < 3; j++) {
+				totalRaw += chiSquare[i][j];
+			}
+			chiSquare[i][3] = totalRaw;
+		}
+		
+		int sum1 = 0;
+		for(int i = 0; i < 3; i++) {
+			sum1 += chiSquare[2][i];
+		}
+		chiSquare[2][3] = sum1;
+		
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 4; j++) {
+				expection[i][j] = chiSquare[i][j];
+			}
+		}
+			
+		for(int i = 0; i < 2; i++) {
+			for(int j = 0; j < 3; j++) {
+				expection[i][j] = ((double)expection[i][3] / expection[2][3]) * expection[2][j];
+			}
+		}
+		
+		double chi = 0;
+		for(int i = 0; i < 2; i++) {
+			for(int j = 0; j < 3; j++) {
+				chi += ((double)chiSquare[i][j] - expection[i][j]) * ((double)chiSquare[i][j] - expection[i][j]) / expection[i][j];
+			}
+		}
+		
+		System.out.println(chi);
+		
 		for(int i = 0; i < records.size(); i++) {
 			teleTime.add(records.get(i).getSeconds());
 		}
@@ -167,6 +224,41 @@ public class Calculate {
 			  + Integer.toString(high) + ", "
 			  + Integer.toString(higher)
 				);
+	}
+	
+	public int[] getPosition(TotalTime time) {
+		int[] result = new int[2];
+		
+		if(time.getClose() == 1) {
+			result[0] = 0;
+			if(time.getTotalTime() < 100) {
+				result[1] = 0;
+			}
+			else {
+				if(time.getTotalTime() < 1000) {
+					result[1] = 1;
+				}
+				else {
+					result[1] = 2;
+				}
+			}
+		}
+		else {
+			result[0] = 1;
+			if(time.getTotalTime() < 100) {
+				result[1] = 0;
+			}
+			else {
+				if(time.getTotalTime() < 1000) {
+					result[1] = 1;
+				}
+				else {
+					result[1] = 2;
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	public ArrayList<Double> getTeleTime() {
