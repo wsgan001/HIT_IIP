@@ -1,22 +1,22 @@
-package com.ui;
+package com.frame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
 
 public class Frame extends JFrame {
 
 	/**
-	 * 序列化ID
+	 * 
 	 */
-	private static final long serialVersionUID = 3400777751121425485L;
+	private static final long serialVersionUID = 9127307525498161619L;
 	private JPanel contentPane;
 
 	/**
@@ -71,8 +71,8 @@ public class Frame extends JFrame {
 		setContentPane(contentPane);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setText("/*系统操作提示面板*/");
 		contentPane.add(textArea, BorderLayout.CENTER);
 	}
-
 }
