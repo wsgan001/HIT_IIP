@@ -6,6 +6,7 @@ public class Training {
     
 	private ArrayList<ArrayList<Double>> valueSet = new ArrayList<ArrayList<Double>>();
 	private ArrayList<ArrayList<Double>> testSet = new ArrayList<ArrayList<Double>>();
+
 	private ArrayList<Double> weight = new ArrayList<Double>();
 
 	private int YES = 0;
@@ -21,6 +22,10 @@ public class Training {
 
 	public ArrayList<Double> getWeight() {
 		return weight;
+	}
+	
+	public ArrayList<ArrayList<Double>> getTestSet() {
+		return testSet;
 	}
 
 	// 对训练集进行初始化赋值

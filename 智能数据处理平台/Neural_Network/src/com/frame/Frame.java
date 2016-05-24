@@ -168,6 +168,16 @@ public class Frame extends JFrame {
 			}
 		});
 		menu_1.add(menuItem_4);
+		
+		JMenuItem mntmroc = new JMenuItem("生成ROC曲线");
+		mntmroc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent roc) {
+				ROC r = new ROC(training, classfication);
+				//r.getRange();
+				r.trainingROC();
+			}
+		});
+		menu_1.add(mntmroc);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

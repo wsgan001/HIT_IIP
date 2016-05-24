@@ -9,8 +9,20 @@ public class Classfication {
 	private ArrayList<Double> plus = new ArrayList<Double>();
 	private ArrayList<Double> minus = new ArrayList<Double>();
 	
+	private double[][] distance;
+
+	private double maxDistance = 0;
+	
 	private int YES = 0;
 	private int NO = 0;
+	
+	public double getMaxDistance() {
+		return maxDistance;
+	}
+	
+	public double[][] getDistance() {
+		return distance;
+	}
 	
 	public int getYES() {
 		return YES;
@@ -41,6 +53,9 @@ public class Classfication {
 	
 	// 测试集测试
 	public void testClass() {
+		
+		distance = new double[testSet.size()][2];
+		
 		for(int i = 0; i < testSet.size(); i++) {
 			
 			double distancePlus = 0;
@@ -66,9 +81,16 @@ public class Classfication {
 					NO++;
 			}
 			
+			//求取最大距离并保留所有距离
+			distance[i][0] = distancePlus;
+			distance[i][1] = distanceMinus;
+			if(maxDistance < distancePlus)
+				maxDistance = distancePlus;
+			if(maxDistance < distanceMinus)
+				maxDistance = distanceMinus;
 		}
 	}
-	
+
 	// 最近中心分类
 	public void classify() {
 		int plusnum = 0;
