@@ -37,7 +37,9 @@ public class Frame extends JFrame {
 	private JTextArea textArea;
 
 	public Training training;
+	public Training multiTraining;
 	public Classfication classfication;
+	public MultiSense multiSense;
 	/**
 	 * Launch the application.
 	 */
@@ -136,31 +138,29 @@ public class Frame extends JFrame {
 		JMenuItem menuItem_1 = new JMenuItem("关闭");
 		menu.add(menuItem_1);
 		
-		JMenu menu_1 = new JMenu("数据操作");
+		JMenu menu_1 = new JMenu("单层感知机操作");
 		menuBar.add(menu_1);
 		
-		JMenuItem menuItem_2 = new JMenuItem("数据训练");
+		JMenuItem menuItem_2 = new JMenuItem("单层感知机学习");
 		menuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent train) {
-				textArea.append("\n感知机训练集数据开始进行训练 " + new Date().toString() + "\n");
+				textArea.append("\n单层感知机训练集数据,中心分类器开始进行训练 " + new Date().toString() + "\n");
 				training = new Training(trainingSet);
-				training.learning();
+				training.learning(1000);
 				training.testTraining();
-				textArea.append("\n感知机训练集数据训练后判断 " + "Yes: " + training.getYES() + " " + "NO: " + training.getNO() + "\n");
-				
-				textArea.append("\n中心分类训练集数据开始进行训练 " + new Date().toString() + "\n");
-				
+				textArea.append("\n单层感知机训练集数据训练后判断 " + "Yes: " + training.getYES() + " " + "NO: " + training.getNO() + "\n");
+							
 				classfication = new Classfication(trainingSet);
 				
 			}
 		});
 		menu_1.add(menuItem_2);
 		
-		JMenuItem menuItem_4 = new JMenuItem("数据测试");
+		JMenuItem menuItem_4 = new JMenuItem("单层感知机测试");
 		menuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent test) {
 				training.testTesting(testSet); 
-				textArea.append("\n测试集数据测试后判断 " + "Yes: " + training.getYES() + " " + "NO: " + training.getNO() + "\n");
+				textArea.append("\n单层感知机测试集数据测试后判断 " + "Yes: " + training.getYES() + " " + "NO: " + training.getNO() + "\n");
 				
 				classfication.testTesting(testSet);
 				classfication.testClass();
@@ -178,6 +178,35 @@ public class Frame extends JFrame {
 			}
 		});
 		menu_1.add(mntmroc);
+		
+		JMenu menu_2 = new JMenu("多层感知机操作");
+		menuBar.add(menu_2);
+		
+		JMenuItem menuItem_5 = new JMenuItem("多层感知机学习");
+		menuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent multitraining) {
+				textArea.append("\n多层感知机训练集数据开始进行训练 " + new Date().toString() + "\n");
+				
+				//multiSense = new MultiSense(trainingSet, testSet);
+				//multiSense.training();
+				//multiSense.testing(0);
+				multiTraining = new Training(trainingSet);
+				multiTraining.learning(2000);		
+				multiTraining.testTesting(testSet); 
+				textArea.append("\n多层感知机测试集数据测试后判断 " + "Yes: " + multiTraining.getYES() + " " + "NO: " + multiTraining.getNO() + "\n");
+				
+			}
+		});
+		menu_2.add(menuItem_5);
+		
+		JMenuItem mntmRoc = new JMenuItem("ROC性能比较");
+		mntmRoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ROCmulti r = new ROCmulti(training, multiTraining);
+				r.trainingROC();
+			}
+		});
+		menu_2.add(mntmRoc);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

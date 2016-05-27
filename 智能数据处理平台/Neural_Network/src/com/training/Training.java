@@ -49,9 +49,9 @@ public class Training {
 	}
 	
 	// 训练集学习函数
-	public void learning() {
-		// 判断步数	
-		int step = 1000;
+	public void learning(int step) {
+		// 判断步数	step
+		
 		// 学习率
 		double rate = 0.01;
 		
