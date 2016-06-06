@@ -16,9 +16,14 @@ public class BFS {
 	private Queue<String> hasExplored = new LinkedList<String>();
 	private boolean flag = true;
 	
-	public BFS(HashMap<String, ListNode> table) {
+	private String start;
+	private String end;
+	
+	public BFS(HashMap<String, ListNode> table, String s, String e) {
 		this.Lomania_Table = table;
-		explored.add(Lomania_Table.get("Arad"));
+		this.start = s;
+		this.end = e;
+		explored.add(Lomania_Table.get(start));
 	}
 	
 	public void BFS_Search() {
@@ -34,7 +39,7 @@ public class BFS {
 				else {
 					unique.add(temp.location);
 				}
-				if(temp.location.equals("Bucharest"))
+				if(temp.location.equals(end))
 					flag = false;
 			}
 			// 待扩展结点是否在队列中
