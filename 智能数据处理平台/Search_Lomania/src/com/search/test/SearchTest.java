@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import com.search.method.AStar;
 import com.search.method.BFS;
 import com.search.method.DFS;
 import com.search.method.IDS;
@@ -389,6 +390,14 @@ public class SearchTest {
 		System.out.println("**********************************迭代加深搜索**********************************");
 		IDS ids_hit = new IDS(searchTest.HIT_Table, "正心楼", "诚意楼");
 		ids_hit.IDS_Search();
+		
+		System.out.println("**********************************A*算法罗马尼亚问题**********************************");
+		AStar aStar = new AStar(searchTest.Lomania_Table);
+		aStar.AStar_Search();
+		
+		System.out.println("**********************************A*算法哈工大导航问题**********************************");
+		AStar hitStar = new AStar(searchTest.HIT_Table);
+		hitStar.AStar_HITSearch();
 	}
 		
 }
