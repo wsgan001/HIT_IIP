@@ -14,3 +14,8 @@
 
 ## 搜索——Search_Lomania
 * 无信息搜索——BFS,DFS,IDS
+* 启发式搜索——A*算法实现最优路径选取
+* A*算法遍历罗马尼亚城市图
+
+## 关联分析——Correlation
+* 可扩展频繁项集挖掘:Apriori算法
