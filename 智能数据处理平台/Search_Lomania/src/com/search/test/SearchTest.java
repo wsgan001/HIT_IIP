@@ -393,8 +393,8 @@ public class SearchTest {
 		
 		System.out.println("**********************************A*算法罗马尼亚问题**********************************");
 		AStar aStar = new AStar(searchTest.Lomania_Table);
-		aStar.AStar_Search();
-		
+		aStar.AStar_LomaniaSearch();
+		System.out.println();
 		System.out.println("**********************************A*算法哈工大导航问题**********************************");
 		AStar hitStar = new AStar(searchTest.HIT_Table);
 		hitStar.AStar_HITSearch();
