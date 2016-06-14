@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
 import com.correlation.analysis.Apriori;
+import com.correlation.analysis.FPTree;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Frame extends JFrame {
 
@@ -57,7 +59,7 @@ public class Frame extends JFrame {
 	 */
 	public Frame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 601, 429);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -100,15 +102,33 @@ public class Frame extends JFrame {
 		JMenu menu_1 = new JMenu("测试");
 		menuBar.add(menu_1);
 		
-		JMenuItem mntmApriori = new JMenuItem("Apriori测试");
+		JMenuItem mntmApriori = new JMenuItem("Apriori算法测试");
 		mntmApriori.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				textArea.append("Apriori算法测试结果:\n");
 				Apriori apriori = new Apriori(testSet, textArea);
 				apriori.display();
 				apriori.aprioriAnalysis();
+				
+				/*FPTree fptree = new FPTree(testSet);
+		        fptree.setMinSuport(2);
+		        List<List<String>> transRecords = fptree.readTransRocords();
+		        fptree.FPGrowth(transRecords, null);*/
 			}
 		});
 		menu_1.add(mntmApriori);
+		
+		JMenuItem mntmFp = new JMenuItem("FP增长算法测试");
+		mntmFp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textArea.append("FP增长算法测试结果:\n");
+				FPTree fptree = new FPTree(testSet, textArea);
+		        fptree.setMinSuport(2);
+		        List<List<String>> transRecords = fptree.readTransRocords();
+		        fptree.FPGrowth(transRecords, null);
+			}
+		});
+		menu_1.add(mntmFp);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

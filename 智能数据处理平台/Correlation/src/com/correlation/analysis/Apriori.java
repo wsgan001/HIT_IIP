@@ -214,15 +214,22 @@ public class Apriori {
 
 		for (int i = 0; i < tempList.size(); i++) {
 			List<String> testLine = new ArrayList<String>();
+			List<String> testLine2 = new ArrayList<String>();
 
 			for (int j = 0; j < tempList.size(); j++) {
 				if (i != j) {
 					testLine.add(tempList.get(j));
 				}
 			}
+			
+			for (int j = tempList.size() - 1; j > 0; j--) {
+				if (i != j) {
+					testLine2.add(tempList.get(j));
+				}
+			}
 
 			for (int k = 0; k < lItemset.size(); k++) {
-				if (testLine.equals(lItemset.get(k))) {
+				if (testLine.equals(lItemset.get(k)) || testLine2.equals(lItemset.get(k))) {
 					flag = true;
 					break;
 				}
@@ -240,10 +247,28 @@ public class Apriori {
 	public boolean nextItemSetNotHave(List<String> aLine,
 			List<List<String>> nextItemset) {
 		boolean notHave = true;
+		
+		List<String> tempLine = new ArrayList<String>();
+		for(int i = 0; i < aLine.size(); i++) {
+			tempLine.add(aLine.get(i));
+		}
 
 		for (int i = 0; i < nextItemset.size(); i++) {
+					
 			if (aLine.equals(nextItemset.get(i))) {
 				notHave = false;
+			}
+			
+			if( aLine.size() > 2) {
+				for(int j = 0; j < tempLine.size(); j++) {
+					if(nextItemset.get(i).contains(tempLine.get(j))) {
+						if( j == tempLine.size() - 1) {
+							notHave = false;
+							break;
+						}
+						continue;
+					}
+				}
 			}
 		}
 		return notHave;
